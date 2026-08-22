@@ -57,7 +57,6 @@ const REMINDERS = [
   'you have 3 unread invites and one excuse.',
   'always chase your joy.',
   "go beyond what's ordinary.",
-  'spread your pixie energy.',
   'leave stress at the door. we lost the key.'
 ];
 
@@ -69,7 +68,7 @@ const MARK_SVG = {
 
 const state = {
   persona: null, stage: 'intro', qi: 0, scores: { citrus:0, mint:0, daydream:0 },
-  view: 'desktop', watchHoverPersona: null, facePersona: 'citrus', eggs: [], logoTaps: 0,
+  watchHoverPersona: null, facePersona: 'citrus', eggs: [], logoTaps: 0,
   footerOpen: {}, crownDeg: 0, heroP: 0, heroMX: 0, heroMY: 0
 };
 
@@ -100,17 +99,6 @@ function showPanel(id){
   $(id).classList.add('active');
 }
 
-/* ---- view toggle ---- */
-function setView(v){
-  state.view = v;
-  const frame = $('frame');
-  frame.classList.toggle('mobile', v === 'mobile');
-  $('btnDesktop').classList.toggle('active', v === 'desktop');
-  $('btnMobile').classList.toggle('active', v === 'mobile');
-  updateCardScale();
-}
-$('btnDesktop').onclick = () => setView('desktop');
-$('btnMobile').onclick = () => setView('mobile');
 window.addEventListener('resize', () => updateCardScale());
 
 /* ---- logo tap egg ---- */
@@ -154,35 +142,14 @@ function renderQuestion(){
     });
     body.appendChild(grid);
   } else if (q.type === 'button') {
-    const [main, ...pills] = q.opts;
-    const wrap = document.createElement('div'); wrap.className = 'press-wrap';
-    const btn = document.createElement('button'); btn.className = 'press-btn'; btn.textContent = main.label.toUpperCase();
-    btn.style.setProperty('--accent', PERSONAS[main.persona].color);
-    let pressed = false;
-    const applyDodge = (mx, my) => {
-      const s = pressed ? 0.94 : 1;
-      btn.style.transform = `translate(${-mx*0.22}px,${-my*0.22}px) scale(${s})`;
-    };
-    let lastMx = 0, lastMy = 0;
-    btn.onmousemove = (e) => {
-      const r = btn.getBoundingClientRect();
-      lastMx = e.clientX - r.left - r.width/2; lastMy = e.clientY - r.top - r.height/2;
-      applyDodge(lastMx, lastMy);
-    };
-    btn.onpointerdown = () => { pressed = true; applyDodge(lastMx, lastMy); };
-    btn.onpointerup = () => { pressed = false; applyDodge(lastMx, lastMy); };
-    btn.onpointerleave = () => { pressed = false; };
-    btn.onclick = () => advance(main.persona);
-    wrap.appendChild(btn);
     const row = document.createElement('div'); row.className = 'press-pills';
-    pills.forEach(o => {
+    q.opts.forEach(o => {
       const b = document.createElement('button'); b.className = 'opt-pill'; b.textContent = o.label;
       b.style.setProperty('--accent', PERSONAS[o.persona].color);
       b.onclick = () => advance(o.persona);
       row.appendChild(b);
     });
-    wrap.appendChild(row);
-    body.appendChild(wrap);
+    body.appendChild(row);
   } else if (q.type === 'portal') {
     const row = document.createElement('div'); row.className = 'portal-row';
     q.opts.forEach(o => {
@@ -435,13 +402,12 @@ function renderFooter(){
   const wrap = $('footerCols'); wrap.innerHTML = '';
   FOOTER_COLS.forEach(col => {
     const box = document.createElement('div');
-    const open = state.footerOpen[col.title] !== false; // default open on desktop via CSS media check not needed; simple toggle
     box.innerHTML = `
       <button class="footer-toggle" data-col="${col.title}">
         <span class="footer-col-title">${col.title}</span>
         <span class="chev" style="transform:rotate(${state.footerOpen[col.title] ? 180 : 0}deg);transition:transform 380ms">▾</span>
       </button>
-      <div class="footer-links" style="display:${(state.view==='mobile' && !state.footerOpen[col.title]) ? 'none' : 'flex'}">
+      <div class="footer-links${state.footerOpen[col.title] ? ' open' : ''}">
         ${col.links.map(l => `<a href="#">${l}</a>`).join('')}
       </div>`;
     box.querySelector('.footer-toggle').onclick = () => {
