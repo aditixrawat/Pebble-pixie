@@ -103,9 +103,11 @@ function setView(v){
   frame.classList.toggle('mobile', v === 'mobile');
   $('btnDesktop').classList.toggle('active', v === 'desktop');
   $('btnMobile').classList.toggle('active', v === 'mobile');
+  updateCardScale();
 }
 $('btnDesktop').onclick = () => setView('desktop');
 $('btnMobile').onclick = () => setView('mobile');
+window.addEventListener('resize', () => updateCardScale());
 
 /* ---- logo tap egg ---- */
 $('logoBtn').onclick = () => {
@@ -275,6 +277,13 @@ function renderReveal(){
     { label:'DAYDREAM LEVEL', value:dream, color:'var(--color-daydream)' }
   ];
   $('statsRow').innerHTML = stats.map(st => `<div class="stat"><div class="stat-val" style="color:${st.color}">${st.value}%</div><div class="stat-label">${st.label}</div></div>`).join('');
+  updateCardScale();
+}
+
+function updateCardScale(){
+  const frameEl = $('cardFrame');
+  if (!frameEl || !frameEl.offsetWidth) return;
+  frameEl.style.setProperty('--card-scale', frameEl.offsetWidth / 1080);
 }
 
 function drawMark(x, key, cx, cy, r){
@@ -433,7 +442,6 @@ $('stressNoteBtn').onclick = () => egg('note');
 const heroEls = {
   section: $('hero'), pin: $('heroPin'), bg: $('heroBg'), boring: $('heroBoring'),
   boringCopy: $('heroCopyBoring'), burst: $('heroBurst'), polaroid: $('heroPolaroid'),
-  echoCitrus: $('heroEchoCitrus'), echoMint: $('heroEchoMint'), echoDaydream: $('heroEchoDaydream'),
   sticker: $('heroSticker'), watch: $('heroWatchOuter'), glow: $('heroWatchGlow'),
   finalInner: $('heroFinalInner'), scrollCue: $('heroScrollCue')
 };
@@ -482,12 +490,6 @@ function renderHero(){
   heroEls.glow.style.backgroundPosition = `${50 + mx * 22}% 50%`;
 
   const worldStagger = heroBand(p, 0.55, 0.86);
-  heroEls.echoCitrus.style.opacity = heroBand(p, 0.52, 0.78);
-  heroEls.echoCitrus.style.transform = `translate(${mx * 10}px, ${heroLerp(16, 0, heroBand(p, 0.52, 0.78))}px)`;
-  heroEls.echoMint.style.opacity = heroBand(p, 0.58, 0.84);
-  heroEls.echoMint.style.transform = `translate(${mx * 6}px, ${heroLerp(16, 0, heroBand(p, 0.58, 0.84))}px)`;
-  heroEls.echoDaydream.style.opacity = heroBand(p, 0.64, 0.9);
-  heroEls.echoDaydream.style.transform = `translate(${mx * 14}px, ${heroLerp(16, 0, heroBand(p, 0.64, 0.9))}px)`;
   heroEls.sticker.style.opacity = worldStagger;
   heroEls.polaroid.style.opacity = worldStagger;
   heroEls.polaroid.style.transform = `translateY(${heroLerp(24, 0, worldStagger)}px) rotate(${heroLerp(-10, -5, worldStagger)}deg)`;
