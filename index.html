@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pebble Pixie — The Anti Boring Club</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain" id="grain"></div>
+<div class="vignette"></div>
+
+<div class="frame" id="frame">
+
+  <header>
+    <button class="logo-btn" id="logoBtn" title="tap me">
+      <span class="logo-word">pebble</span>
+      <span class="logo-badge">PIXIE</span>
+    </button>
+    <nav class="main-nav">
+      <a href="#personas">personas</a>
+      <a href="#quiz">the quiz</a>
+      <a href="#club">the club</a>
+    </nav>
+    <a href="#quiz" class="btn btn-primary btn-md hdr-cta">FIND YOUR PIXIE →</a>
+  </header>
+
+  <section id="hero">
+    <div class="hero-pin" id="heroPin">
+      <div class="hero-bg" id="heroBg"></div>
+
+      <div class="hero-boring" id="heroBoring">
+        <div class="boring-grid" id="boringGrid"></div>
+      </div>
+
+      <div class="hero-copy-boring" id="heroCopyBoring">
+        <p class="hero-eyebrow">PIXIE™ — COMING 28.08</p>
+        <h2>BORING IS A SETTING.<br><span>NOT A PERSONALITY.</span></h2>
+      </div>
+
+      <div class="hero-burst" id="heroBurst"></div>
+
+      <div class="hero-polaroid" id="heroPolaroid">
+        <img src="assets/polaroid-citrus-tight.jpg" alt="">
+      </div>
+
+      <span class="hero-echo hero-echo-citrus" id="heroEchoCitrus">CITRUS SPARK</span>
+      <span class="hero-echo hero-echo-mint" id="heroEchoMint">MINT MISCHIEF</span>
+      <span class="hero-echo hero-echo-daydream" id="heroEchoDaydream">DAYDREAM BLUE</span>
+      <div class="hero-sticker" id="heroSticker">gray is cancelled</div>
+
+      <div class="hero-product" id="heroProduct">
+        <div class="hero-watch-outer" id="heroWatchOuter">
+          <div class="hero-watch-inner">
+            <img src="assets/w-citrus-c.png" class="hero-watch-img" alt="Pebble Pixie smartwatch, Citrus Spark colourway">
+            <div class="hero-watch-glow" id="heroWatchGlow"></div>
+          </div>
+          <div class="hero-watch-shadow"></div>
+        </div>
+      </div>
+
+      <div class="hero-final" id="heroFinal">
+        <div class="hero-final-inner" id="heroFinalInner">
+          <p class="hero-eyebrow">PEBBLE PIXIE</p>
+          <h1>MEET PIXIE.</h1>
+          <p class="hero-final-sub">THE SMARTWATCH FOR PEOPLE WHO DON'T DO BORING.</p>
+          <a href="#quiz" class="btn btn-primary btn-lg hero-cta">ENTER THE ANTI-BORING CLUB →</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-cue" id="heroScrollCue">SCROLL<span>↓</span></div>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="flash-overlay" id="flashOverlay"></div>
+
+    <div class="quiz-panel active" id="panelIntro">
+      <div class="quiz-intro">
+        <div class="glow"></div>
+        <div class="inner">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.2em;opacity:.65">OK. ENOUGH ABOUT PIXIE.</div>
+          <h2 style="font-size:clamp(30px,5.6cqw,58px);line-height:1.04;letter-spacing:-.03em;margin:18px 0 0">what about you?</h2>
+          <p style="margin:14px 0 0;font-weight:600;font-size:19px">let's find out.</p>
+          <p style="margin:22px 0 0;font-size:13px;letter-spacing:.1em;opacity:.6">4 QUESTIONS. 1 PIXIE.</p>
+          <button class="quiz-cta" id="startQuizBtn">FIND YOUR PIXIE →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-panel" id="panelCalc">
+      <div class="calc-box">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.2em;opacity:.6">CALCULATING YOUR LEVEL OF BORING</div>
+        <div class="calc-pct" id="calcPct"></div>
+      </div>
+    </div>
+
+    <div class="quiz-panel" id="panelQuiz">
+      <div class="quiz-card">
+        <div class="quiz-flash" id="quizFlash"></div>
+        <div class="quiz-topbar">
+          <div class="quiz-step-label"><span class="dot"></span><span id="stepLabel">1 / 4</span></div>
+          <div class="ticks" id="ticks"></div>
+        </div>
+        <h2 class="quiz-q" id="quizQ"></h2>
+        <div id="quizBody"></div>
+        <div class="quiz-back-row">
+          <button class="quiz-back" id="backBtn">back</button>
+          <span>no wrong answers. only revealing ones.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-panel" id="panelReveal">
+      <div class="reveal">
+        <div style="text-align:center">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--text-muted)">YOUR PIXIE IS READY.</div>
+          <h2 style="font-size:clamp(34px,6cqw,72px);line-height:.98;letter-spacing:-.03em;margin:14px 0 0">now, meet your avatar.</h2>
+          <p style="margin:8px 0 0;font-size:14px;color:var(--text-muted)">now find your people.</p>
+        </div>
+        <div class="reveal-row">
+          <div class="card-frame">
+            <div class="card-inner" id="cardInner">
+              <img class="bg" id="cardBg" alt="">
+              <div class="grad"></div>
+              <div class="card-topband"><span class="card-clubtag">THE ANTI BORING CLUB</span></div>
+              <div class="card-bottom">
+                <div class="card-name-row" id="cardNameRow">
+                  <span class="persona-mark" id="cardMark"></span>
+                  <div class="card-name" id="cardName"></div>
+                </div>
+                <div class="card-subtitle" id="cardSubtitle"></div>
+                <div class="card-type-pill"><span class="swatch" id="cardSwatch"></span><span id="cardType"></span></div>
+                <div class="card-lines" id="cardLines"></div>
+                <div class="card-footer"><span class="word">pebble</span><span class="sub">PIXIE SMARTWATCH</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-side">
+            <div class="badge-box" id="badgeBox">
+              <div class="badge-top" id="badgeTop"><span class="persona-mark" id="badgeMark"></span><span id="badgeName"></span><span class="badge-type" id="badgeType"></span></div>
+              <div class="badge-sub" id="badgeSub"></div>
+            </div>
+            <p class="reveal-lines" id="revealLines"></p>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--text-muted);margin-top:6px" id="revealVibe"></div>
+            <div class="stats-row" id="statsRow"></div>
+            <p class="reveal-blurb" id="revealBlurb"></p>
+            <div class="reveal-ctas">
+              <button class="btn btn-primary btn-lg" id="downloadBtn"><span style="display:inline-flex;align-items:center;gap:8px">DOWNLOAD YOUR CARD <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 12l6 6 6-6M5 20h14"/></svg></span></button>
+              <button class="btn btn-secondary btn-lg" id="retakeBtn">RETAKE</button>
+            </div>
+            <div class="share-row">
+              <span>SHARE TO</span><span class="share-pill">STORIES</span><span class="share-pill">COPY LINK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bento-section stack-card">
+    <div class="bento-grid">
+      <div class="bento-hero">
+        <div class="bento-hero-top">
+          <span style="padding:7px 14px;border-radius:var(--radius-pill);background:var(--color-ink);color:var(--color-white);font-size:11px;font-weight:700;letter-spacing:.1em">PIXIE</span>
+          <span style="display:flex;gap:6px;margin-left:6px">
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--color-citrus)"></span>
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--color-mint)"></span>
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--color-daydream)"></span>
+          </span>
+          <span style="margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text-muted)">FIND YOUR PIXIE →</span>
+        </div>
+        <div class="bento-hero-body">
+          <div class="bento-hero-copy">
+            <div class="bento-hero-headline">DOME<br><span style="color:var(--color-citrus)">AMOLED</span><br>DIALED UP.</div>
+            <div style="display:flex;gap:12px;margin-top:24px">
+              <button class="btn btn-primary btn-md">SHOP NOW</button>
+              <button class="btn btn-secondary btn-md">WATCH</button>
+            </div>
+          </div>
+          <img class="bento-hero-img" src="assets/fit-watch.jpg" alt="Pixie on the wrist">
+        </div>
+      </div>
+      <div class="bento-tile bento-citrus">
+        <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3.2cqw,34px);line-height:1.06">GRAY DOESN'T<br>LIVE HERE<br>ANYMORE.</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.12em"><span>PEBBLE PIXIE</span><span style="opacity:.6">EST · 2026</span></div>
+      </div>
+      <div class="bento-tile bento-photo">
+        <img src="assets/health-macro.jpg" alt="Health monitoring macro">
+        <div class="bento-photo-copy">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(40px,5.4cqw,60px);line-height:.9">72<span style="font-size:.5em">hrs</span></div>
+          <div style="margin-top:4px;font-size:12px;letter-spacing:.08em;opacity:.72">battery that outlasts the group chat</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-ink)">
+    <div class="storm-card">
+      <div style="flex:1 1 280px;color:var(--color-off-white)">
+        <div class="eyebrow" style="border-color:var(--color-daydream);color:var(--color-daydream)">SMART FEATURES</div>
+        <h2 style="font-size:clamp(28px,4cqw,44px);line-height:1.02;letter-spacing:-.02em;margin:18px 0 0">notification storm</h2>
+        <p style="margin:14px 0 0;max-width:420px;font-size:15px;line-height:1.6;opacity:.7">every text, call and chaotic group-chat ping — landing on your wrist before your phone even buzzes.</p>
+      </div>
+      <video src="assets/notification-storm.mp4" autoplay loop muted playsinline></video>
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-paper)">
+    <div style="max-width:720px" class="anim-rise">
+      <div class="eyebrow">DOME AMOLED DISPLAY</div>
+      <h2 style="font-size:clamp(34px,6cqw,74px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">if it's dull or flat, <span style="color:var(--color-daydream)">I'm out.</span></h2>
+      <p style="margin:18px 0 0;max-width:520px;font-size:15px;line-height:1.6;color:var(--text-muted)">experience joy every time you feel the pixie's 3d spherical display, so your wrist looks as dreamy as your thoughts.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(18px,3cqw,40px);align-items:center;margin-top:clamp(28px,4cqw,48px)">
+      <div class="face-picker" id="facePicker">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--color-ink);opacity:.6">TAP TO SWITCH</div>
+        <img id="faceImg" src="assets/w-citrus-c.png" alt="Pixie watch face">
+        <div class="face-dots" id="faceDots"></div>
+      </div>
+      <img src="assets/lifestyle-palm.jpg" alt="Wearing the Pixie outdoors" style="width:100%;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg)">
+    </div>
+    <div class="spec-strip">
+      <div class="spec-cell"><div class="spec-val">Always-on</div><div style="font-size:13px;color:var(--text-muted)">Display</div></div>
+      <div class="spec-cell"><div class="spec-val">1.32</div><div style="font-size:13px;color:var(--text-muted)">AMOLED Display</div></div>
+      <div class="spec-cell"><div class="spec-val">Ultra-Slim</div><div style="font-size:13px;color:var(--text-muted)">Bezels</div></div>
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-white)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(16px,3cqw,40px);align-items:center">
+      <div style="flex:1 1 320px">
+        <div class="eyebrow">SOFT TOUCH STRAPS</div>
+        <h2 style="font-size:clamp(28px,4.6cqw,58px);line-height:.98;letter-spacing:-.03em;margin:16px 0 0">gray is<br><span style="color:var(--color-citrus)">cancelled.</span></h2>
+        <p style="margin:14px 0 0;max-width:420px;font-size:14px;line-height:1.5;color:var(--text-muted)">swappable silicone straps that survive every side quest you ever take on.</p>
+      </div>
+      <img src="assets/strap-citrus-quote.jpg" alt="Pixie Citrus Spark strap on the wrist" style="flex:1 1 300px;width:100%;max-width:380px;max-height:38vh;object-fit:contain">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:clamp(16px,2.4cqw,28px)">
+      <img src="assets/strap-mint.jpg" alt="Mint Mischief strap detail" style="width:100%;max-height:22vh;object-fit:cover;border-radius:var(--radius-sm);box-shadow:var(--shadow-md)">
+      <img src="assets/strap-blue.jpg" alt="Daydream Blue strap detail" style="width:100%;max-height:22vh;object-fit:cover;border-radius:var(--radius-sm);box-shadow:var(--shadow-md)">
+      <img src="assets/life-icecream.jpg" alt="Citrus Spark on the wrist" style="grid-column:span 2;width:100%;max-height:22vh;object-fit:cover;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg)">
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-mint-tint)">
+    <div style="max-width:760px;margin-left:auto;text-align:right">
+      <div class="eyebrow">HAPTIC CROWN</div>
+      <h2 style="font-size:clamp(30px,5cqw,62px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">let me quickly scroll past <span style="color:var(--color-mint)">these reminders.</span></h2>
+      <p style="margin:18px 0 0 auto;max-width:480px;font-size:15px;line-height:1.6;color:var(--text-muted)">scroll seamlessly with soft haptic feedback as you spin a crown that's tactile, clicky and satisfying. go on — drag it.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4cqw,48px);align-items:center;justify-content:center;margin-top:clamp(28px,4cqw,48px)">
+      <div style="flex:0 1 420px">
+        <img src="assets/crown-mint-quote.jpg" alt="Pixie Mint Mischief haptic crown macro" style="width:100%;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg)">
+      </div>
+      <div class="crown-card">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;opacity:.6">TODAY · REMINDERS</div>
+        <div class="reminder-text" id="reminderText"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-white)">
+    <div style="display:flex;flex-wrap:wrap-reverse;gap:clamp(20px,4cqw,56px);align-items:center">
+      <div style="flex:1 1 320px">
+        <div class="eyebrow">LIFESTYLE FIT</div>
+        <h2 style="font-size:clamp(32px,5.4cqw,68px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">it's giving <span style="color:var(--color-mint)">main character</span> vibes.</h2>
+        <p style="margin:18px 0 0;max-width:440px;font-size:15px;line-height:1.6;color:var(--text-muted)">disrupt the status quo with a statement piece that reflects your inner pixie energy.</p>
+      </div>
+      <img src="assets/fit-watch.jpg" alt="Pixie on the wrist" style="flex:0 1 300px">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:clamp(24px,3cqw,44px);align-items:center">
+      <img src="assets/polaroid-phone.jpg" alt="Daydreamer with the Pixie" style="width:100%">
+      <img src="assets/brick-hand.jpg" alt="Citrus Spark against a mural" style="width:100%;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg)">
+      <img src="assets/film-trio.jpg" alt="Film strip of the Pixie" style="width:100%">
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-ink);color:var(--color-off-white)">
+    <div style="max-width:700px">
+      <div class="eyebrow" style="border-color:var(--color-citrus);color:var(--color-citrus)">NEX GEN HEALTH SUITE</div>
+      <h2 style="font-size:clamp(34px,6cqw,74px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">tracking my <span style="color:var(--color-citrus)">inner chaos.</span></h2>
+      <p style="margin:18px 0 0;max-width:520px;font-size:15px;line-height:1.6;opacity:.68">nexgen sensors that seamlessly monitor steps, heart rate, spo₂ and sleep (of which we know you are deprived).</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4cqw,48px);align-items:center;margin-top:clamp(28px,4cqw,48px)">
+      <img src="assets/mint-health-render.jpg" alt="Mint Mischief health monitoring render" style="flex:1 1 300px;width:100%;max-width:460px;border-radius:var(--radius-sm);box-shadow:var(--shadow-pop)">
+      <div style="flex:1 1 300px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+        <div class="health-tile"><div style="font-size:11px;letter-spacing:.14em;opacity:.6">STEPS</div><div style="margin-top:6px;font-family:var(--font-display);font-weight:700;font-size:26px">counted</div></div>
+        <div class="health-tile"><div style="font-size:11px;letter-spacing:.14em;opacity:.6">HEART RATE</div><div style="margin-top:6px;font-family:var(--font-display);font-weight:700;font-size:26px">elevated, always</div></div>
+        <div class="health-tile"><div style="font-size:11px;letter-spacing:.14em;opacity:.6">SPO₂</div><div style="margin-top:6px;font-family:var(--font-display);font-weight:700;font-size:26px">breathing, technically</div></div>
+        <div class="health-tile"><div style="font-size:11px;letter-spacing:.14em;opacity:.6">SLEEP</div><div style="margin-top:6px;font-family:var(--font-display);font-weight:700;font-size:26px">lol.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack-card" style="background:var(--color-white)">
+    <div style="max-width:760px">
+      <div class="eyebrow">SMART FEATURES</div>
+      <h2 style="font-size:clamp(32px,5.6cqw,70px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">look ma, my group chat<br>is on a <span style="color:var(--color-daydream)">watch.</span></h2>
+      <p style="margin:18px 0 0;max-width:560px;font-size:15px;line-height:1.6;color:var(--text-muted)">your phone might get a little jealous, now that your calls and texts are on your wrist — along with your calendar, notifications and more.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4cqw,40px);justify-content:center;margin-top:clamp(28px,4cqw,48px)">
+      <div style="flex:0 1 300px;text-align:center">
+        <img src="assets/w-ui-message-c.png" alt="Message on the Pixie" style="width:100%;border-radius:50%;box-shadow:var(--shadow-lg)">
+        <div style="margin-top:14px;font-size:13px;color:var(--text-muted)">reply-worthy notifications</div>
+      </div>
+      <div style="flex:0 1 300px;text-align:center">
+        <img src="assets/w-ui-controls-c.png" alt="Quick controls on the Pixie" style="width:100%;border-radius:50%;box-shadow:var(--shadow-lg)">
+        <div style="margin-top:14px;font-size:13px;color:var(--text-muted)">everything one twist away</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="personas" style="text-align:center">
+    <h2 style="font-size:clamp(34px,6cqw,74px);line-height:.98;letter-spacing:-.03em;margin:0">which pixie are you?</h2>
+    <p style="margin:14px 0 0;font-size:15px;color:var(--text-muted)">choose the perfect partner to your energy.</p>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:26px" id="swatchRow"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px">
+      <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3cqw,36px)" id="swatchNameRow">
+        <span class="persona-mark" id="swatchMark"></span><span id="swatchName"></span>
+      </div>
+    </div>
+    <img id="swatchImg" alt="Selected Pixie colourway" style="width:min(420px,80cqw);margin:6px auto 0">
+    <img src="assets/wrist-swirl.jpg" alt="All three Pixie colourways on the wrist" style="width:100%;max-width:900px;margin:clamp(20px,3cqw,36px) auto 0;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg)">
+  </section>
+
+  <section id="club" style="background:var(--color-daydream-tint)">
+    <div class="club-row" style="display:flex;flex-wrap:wrap;gap:clamp(20px,4cqw,48px);align-items:center;justify-content:center">
+      <div class="club-note">club rules (so called)<div style="margin-top:8px;font-weight:500;font-size:13px;line-height:1.6">— always chase your joy<br>— go beyond what's ordinary<br>— spread your pixie energy</div></div>
+      <div style="flex:1 1 340px;max-width:620px;text-align:center">
+        <h2 style="font-size:clamp(34px,6cqw,74px);line-height:.96;letter-spacing:-.03em;margin:0">join the<br>anti boring club</h2>
+        <p style="margin:18px 0 0;font-size:15px;line-height:1.6;color:var(--text-muted)">a community of those who believe that life exists beyond gray squares and meeting schedules. the pixie lands 28 august.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px">
+          <input placeholder="your email, no spam we promise" style="flex:1 1 260px;max-width:320px;padding:15px 20px;border:1.5px solid var(--color-ink);border-radius:var(--radius-pill);background:var(--color-white);font-family:var(--font-body);font-size:14px;color:var(--color-ink);outline:none">
+          <button class="btn btn-primary btn-lg"><span style="display:inline-flex;align-items:center;gap:9px">ADOPT YOUR PIXIE <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2 6.3 6.2 1.9-6.2 2L12 18.2l-2-6.2-6.2-2L10 8.1l2-6.3z"/></svg></span></button>
+        </div>
+      </div>
+      <button class="club-note-yellow" id="stressNoteBtn">leave stress at the door<div style="margin-top:6px;font-weight:500;font-size:12px">(we lost the key)</div></button>
+    </div>
+  </section>
+
+  <footer>
+    <img class="banner" src="assets/footer-club-banner.jpg" alt="Join the Anti-Boring Club — gray is cancelled">
+    <div class="footer-inner">
+      <div class="footer-grid" id="footerGrid">
+        <div style="max-width:280px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--color-mint)"><path d="M12 1.8l2 6.3 6.2 1.9-6.2 2L12 18.2l-2-6.2-6.2-2L10 8.1l2-6.3z"/></svg>
+            <span style="font-family:var(--font-display);font-weight:700;font-size:24px">pebble</span>
+          </div>
+          <p style="margin:16px 0 0;font-size:13px;line-height:1.7;opacity:.65">since inception in 2013, there has been one principle that we, at pebble, have held as holy grail — build experiences crafted around 'you'. pixie is our loudest proof yet.</p>
+        </div>
+        <div id="footerCols"></div>
+        <div>
+          <div class="footer-col-title" style="padding:14px 0 0">GET IN TOUCH</div>
+          <div style="margin-top:14px;font-size:13px;line-height:1.7;opacity:.75">
+            <div style="font-weight:700;opacity:1">PEBBLE PIXIE LABS</div>
+            for queries: <a href="#" style="color:var(--color-off-white)">hello@pebble.com</a><br>
+            mon–sat, 10am–6:30pm
+          </div>
+          <div style="margin-top:18px;font-size:12px;letter-spacing:.08em;opacity:.7">SUBSCRIBE FOR DROPS</div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <input placeholder="your email" style="flex:1;min-width:0;padding:11px 14px;border:1.5px solid rgba(255,255,255,.25);border-radius:var(--radius-pill);background:transparent;color:var(--color-white);font-family:var(--font-body);font-size:12px;outline:none">
+            <button style="padding:11px 18px;border:1.5px solid var(--color-mint);border-radius:var(--radius-pill);background:transparent;color:var(--color-mint);font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.08em;cursor:pointer">SUBSCRIBE</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>PIXIE SMARTWATCH · THE ANTI BORING CLUB</span>
+        <span>launching 28.08 · gray is cancelled</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="view-toggle">
+  <button id="btnDesktop" class="active">DESKTOP</button>
+  <button id="btnMobile">MOBILE</button>
+</div>
+<div class="egg-counter" id="eggCounter">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--color-gold)"><path d="M12 1.8l2 6.3 6.2 1.9-6.2 2L12 18.2l-2-6.2-6.2-2L10 8.1l2-6.3z"/></svg>
+  <span id="eggLabel">0/5 anti-boring points</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
