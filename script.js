@@ -54,7 +54,11 @@ const REMINDERS = [
   'drink water, main character.',
   'quick call at 4 — it will not be quick.',
   'gym. or a walk. or vibes. anything.',
-  'you have 3 unread invites and one excuse.'
+  'you have 3 unread invites and one excuse.',
+  'always chase your joy.',
+  "go beyond what's ordinary.",
+  'spread your pixie energy.',
+  'leave stress at the door. we lost the key.'
 ];
 
 const MARK_SVG = {
@@ -70,12 +74,12 @@ const state = {
 };
 
 const $ = (id) => document.getElementById(id);
-const eggTotal = 5;
+const eggTotal = 3;
 
 function egg(name){
   if (state.eggs.indexOf(name) > -1) return;
   state.eggs.push(name);
-  $('eggLabel').textContent = state.eggs.length >= eggTotal ? 'certified anti-boring · 5/5' : state.eggs.length + '/' + eggTotal + ' anti-boring points';
+  $('eggLabel').textContent = state.eggs.length >= eggTotal ? `certified anti-boring · ${eggTotal}/${eggTotal}` : state.eggs.length + '/' + eggTotal + ' anti-boring points';
 }
 
 function flash(persona){
@@ -144,6 +148,7 @@ function renderQuestion(){
       const b = document.createElement('button');
       b.className = 'opt-card'; b.textContent = o.label;
       b.style.animationDelay = (i * 90) + 'ms';
+      b.style.setProperty('--accent', PERSONAS[o.persona].color);
       b.onclick = () => advance(o.persona);
       grid.appendChild(b);
     });
@@ -152,16 +157,27 @@ function renderQuestion(){
     const [main, ...pills] = q.opts;
     const wrap = document.createElement('div'); wrap.className = 'press-wrap';
     const btn = document.createElement('button'); btn.className = 'press-btn'; btn.textContent = main.label.toUpperCase();
+    btn.style.setProperty('--accent', PERSONAS[main.persona].color);
+    let pressed = false;
+    const applyDodge = (mx, my) => {
+      const s = pressed ? 0.94 : 1;
+      btn.style.transform = `translate(${-mx*0.22}px,${-my*0.22}px) scale(${s})`;
+    };
+    let lastMx = 0, lastMy = 0;
     btn.onmousemove = (e) => {
       const r = btn.getBoundingClientRect();
-      const mx = e.clientX - r.left - r.width/2, my = e.clientY - r.top - r.height/2;
-      btn.style.transform = `translate(${-mx*0.22}px,${-my*0.22}px)`;
+      lastMx = e.clientX - r.left - r.width/2; lastMy = e.clientY - r.top - r.height/2;
+      applyDodge(lastMx, lastMy);
     };
+    btn.onpointerdown = () => { pressed = true; applyDodge(lastMx, lastMy); };
+    btn.onpointerup = () => { pressed = false; applyDodge(lastMx, lastMy); };
+    btn.onpointerleave = () => { pressed = false; };
     btn.onclick = () => advance(main.persona);
     wrap.appendChild(btn);
-    const row = document.createElement('div'); row.style.display='flex'; row.style.flexWrap='wrap'; row.style.gap='10px'; row.style.justifyContent='center';
+    const row = document.createElement('div'); row.className = 'press-pills';
     pills.forEach(o => {
       const b = document.createElement('button'); b.className = 'opt-pill'; b.textContent = o.label;
+      b.style.setProperty('--accent', PERSONAS[o.persona].color);
       b.onclick = () => advance(o.persona);
       row.appendChild(b);
     });
@@ -186,6 +202,7 @@ function renderQuestion(){
     const opts = document.createElement('div'); opts.className = 'watch-opts';
     q.opts.forEach(o => {
       const b = document.createElement('button'); b.className = 'opt-face'; b.textContent = o.label;
+      b.style.setProperty('--accent', PERSONAS[o.persona].color);
       b.onmouseenter = () => { state.watchHoverPersona = o.persona; img.src = PERSONAS[o.persona].img; img.style.transform = `rotate(${o.persona==='citrus'?-8:o.persona==='daydream'?8:0}deg)`; };
       b.onclick = () => advance(o.persona);
       opts.appendChild(b);
@@ -385,7 +402,7 @@ $('faceImg').addEventListener('pointerdown', (e) => {
 });
 
 /* ---- reminders (haptic crown card, static text cycling on load) ---- */
-$('reminderText').textContent = REMINDERS[0];
+$('reminderText').textContent = REMINDERS[Math.floor(Math.random() * REMINDERS.length)];
 
 /* ---- swatch selector ---- */
 function renderSwatches(){
@@ -435,14 +452,10 @@ function renderFooter(){
   });
 }
 
-/* ---- misc eggs ---- */
-$('stressNoteBtn').onclick = () => egg('note');
-
 /* ---- hero: boring world → pixie interrupts (scroll-linked) ---- */
 const heroEls = {
   section: $('hero'), pin: $('heroPin'), bg: $('heroBg'), boring: $('heroBoring'),
-  boringCopy: $('heroCopyBoring'), burst: $('heroBurst'), polaroid: $('heroPolaroid'),
-  sticker: $('heroSticker'), watch: $('heroWatchOuter'), glow: $('heroWatchGlow'),
+  boringCopy: $('heroCopyBoring'), burst: $('heroBurst'), watch: $('heroWatchOuter'), glow: $('heroWatchGlow'),
   finalInner: $('heroFinalInner'), scrollCue: $('heroScrollCue')
 };
 
@@ -488,11 +501,6 @@ function renderHero(){
   heroEls.watch.style.transform = `translateX(${tx}cqw) rotateY(${ry}deg) rotateX(${rx}deg) scale(${sc})`;
   heroEls.glow.style.opacity = heroBand(p, 0.5, 0.68) * 0.9;
   heroEls.glow.style.backgroundPosition = `${50 + mx * 22}% 50%`;
-
-  const worldStagger = heroBand(p, 0.55, 0.86);
-  heroEls.sticker.style.opacity = worldStagger;
-  heroEls.polaroid.style.opacity = worldStagger;
-  heroEls.polaroid.style.transform = `translateY(${heroLerp(24, 0, worldStagger)}px) rotate(${heroLerp(-10, -5, worldStagger)}deg)`;
 
   heroEls.finalInner.style.opacity = heroBand(p, 0.82, 1);
   heroEls.finalInner.style.transform = `translateY(${heroLerp(26, 0, heroBand(p, 0.82, 1))}px)`;

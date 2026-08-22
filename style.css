@@ -60,6 +60,15 @@ section{ padding:clamp(72px,9cqw,132px) clamp(16px,4cqw,64px); }
 .eyebrow{ display:inline-block; padding:7px 14px; border:1.5px solid var(--color-ink); border-bottom-width:4px; font-size:11px; font-weight:700; letter-spacing:.14em; }
 h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:700; margin:0; }
 .stack-card{ border-radius:28px 28px 0 0; box-shadow:0 -18px 40px rgba(0,20,32,.18); }
+.deck-card{ position:sticky; top:0; z-index:var(--deck,1); min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+#personas, #club, footer{ position:relative; z-index:10; }
+#personas{
+  background:
+    radial-gradient(50% 45% at 12% 12%, var(--color-citrus-tint) 0%, transparent 70%),
+    radial-gradient(50% 45% at 88% 12%, var(--color-mint-tint) 0%, transparent 70%),
+    radial-gradient(60% 50% at 50% 100%, var(--color-daydream-tint) 0%, transparent 70%),
+    var(--color-paper);
+}
 
 /* ---- hero: the boring world → pixie interrupts ---- */
 #hero{ position:relative; height:320vh; padding:0; background:var(--color-paper); }
@@ -86,11 +95,6 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
 
 .hero-burst{ position:absolute; top:50%; left:50%; z-index:3; width:320px; height:320px; margin:-160px 0 0 -160px; border-radius:50%; background:radial-gradient(circle, var(--color-citrus) 0%, transparent 70%); filter:blur(4px); opacity:0; pointer-events:none; }
 
-.hero-polaroid{ position:absolute; z-index:4; bottom:12%; left:8%; width:clamp(90px,11cqw,140px); background:var(--color-white); padding:8px 8px 20px; box-shadow:var(--shadow-pop); opacity:0; pointer-events:none; }
-.hero-polaroid img{ width:100%; aspect-ratio:1/1.1; object-fit:cover; }
-
-.hero-sticker{ position:absolute; z-index:4; bottom:10%; right:9%; padding:10px 16px; background:var(--color-gold-soft); box-shadow:var(--shadow-pop); font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:.02em; transform:rotate(-6deg); opacity:0; pointer-events:none; }
-
 .hero-product{ position:absolute; z-index:5; right:7%; top:50%; transform:translateY(-50%); perspective:1400px; }
 .hero-watch-outer{ position:relative; width:clamp(190px,27cqw,380px); transition:transform .12s linear, opacity .3s linear; }
 .hero-watch-inner{ position:relative; }
@@ -109,12 +113,10 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
 
 @container (max-width:720px){
   .hero-copy-boring h2{ max-width:12ch; }
-  .hero-polaroid{ display:none; }
   .hero-product{ right:50%; transform:translate(50%,-70%); }
   .hero-watch-outer{ width:clamp(160px,44cqw,240px); }
   .hero-final{ left:50%; top:auto; bottom:8%; transform:translateX(-50%); text-align:center; max-width:88%; }
   .hero-final-sub{ margin-left:auto; margin-right:auto; }
-  .hero-sticker{ display:none; }
 }
 
 #quiz{ background:var(--color-paper); position:relative; overflow:hidden; }
@@ -239,8 +241,6 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
 
 .health-tile{ padding:20px; border-radius:var(--radius-md); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); }
 
-.club-note{ padding:22px 20px; background:var(--color-daydream); box-shadow:var(--shadow-pop); font-family:var(--font-display); font-weight:700; font-size:16px; line-height:1.45; transform:rotate(-3deg); }
-.club-note-yellow{ padding:20px 18px; border:none; background:var(--color-gold-soft); box-shadow:var(--shadow-pop); transform:rotate(-7deg); font-family:var(--font-display); font-weight:700; font-size:16px; line-height:1.4; text-align:left; color:var(--color-ink); cursor:pointer; }
 
 footer{ padding:0 0 28px; background:var(--color-ink); color:var(--color-off-white); }
 footer img.banner{ width:100%; max-height:60vh; object-fit:cover; display:block; }
