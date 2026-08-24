@@ -177,7 +177,7 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
 .card-frame{ width:min(304px,78cqw); aspect-ratio:1080/1920; overflow:hidden; border-radius:var(--radius-md); box-shadow:var(--shadow-lg); flex:0 0 auto; }
 .card-inner{ width:1080px; height:1920px; transform:scale(var(--card-scale,.2815)); transform-origin:top left; position:relative; display:flex; flex-direction:column; justify-content:space-between; padding:90px 80px; overflow:hidden; }
 .card-inner img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.card-inner .grad{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,20,32,.15) 0%, rgba(0,20,32,.05) 30%, rgba(0,20,32,.55) 68%, rgba(0,20,32,.92) 100%); }
+.card-inner .grad{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,20,32,.4) 0%, rgba(0,20,32,.28) 30%, rgba(0,20,32,.72) 68%, rgba(0,20,32,.95) 100%); }
 .card-topband{ position:relative; display:flex; align-items:center; gap:18px; }
 .card-clubtag{ padding:14px 30px; border-radius:100px; background:rgba(255,255,255,.16); backdrop-filter:blur(6px); font-family:var(--font-body); font-weight:700; font-size:28px; letter-spacing:.28em; color:var(--color-white); }
 .card-bottom{ position:relative; color:var(--color-white); }
