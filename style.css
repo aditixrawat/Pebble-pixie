@@ -115,9 +115,9 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
   .hero-copy-boring{ padding:0 28px; }
   .hero-copy-boring .hero-eyebrow{ font-size:12px; letter-spacing:.16em; margin-bottom:20px; }
   .hero-copy-boring h2{ max-width:11ch; font-size:clamp(32px,9cqw,46px); line-height:1.1; }
-  .hero-product{ right:50%; top:36%; transform:translate(50%,-50%); }
-  .hero-watch-outer{ width:clamp(150px,42cqw,220px); }
-  .hero-final{ left:50%; top:auto; bottom:9%; transform:translateX(-50%); text-align:center; max-width:min(340px,92%); }
+  .hero-product{ right:50%; top:42%; transform:translate(50%,-50%); }
+  .hero-watch-outer{ width:clamp(210px,58cqw,300px); }
+  .hero-final{ left:50%; top:auto; bottom:6%; transform:translateX(-50%); text-align:center; max-width:min(340px,92%); }
   .hero-eyebrow{ letter-spacing:.22em; }
   .hero-final h1{ margin-top:12px; font-size:clamp(24px,9.5cqw,42px); white-space:nowrap; }
   .hero-final-sub{ margin:12px auto 0; max-width:280px; font-size:14px; }
@@ -259,6 +259,7 @@ footer img.banner{ width:100%; max-height:60vh; object-fit:cover; display:block;
 
 @container (max-width: 720px){
   section{ padding-left:22px; padding-right:22px; }
+  .deck-card{ min-height:auto; padding-top:56px; padding-bottom:56px; }
   .bento-section{ padding-left:22px; padding-right:22px; }
   .footer-inner{ padding-left:22px; padding-right:22px; }
   .bento-grid{ grid-template-columns:1fr; }
@@ -277,4 +278,6 @@ footer img.banner{ width:100%; max-height:60vh; object-fit:cover; display:block;
   .portal{ padding:16px 20px 16px 40px; min-height:64px; justify-content:flex-start; text-align:left; }
   .portal .pdot{ top:50%; left:16px; transform:translateY(-50%); }
   .portal .pname{ font-size:14px; line-height:1.32; }
+  .smart-features-h2{ font-size:clamp(18px,5.4cqw,34px) !important; white-space:nowrap; }
+  .ui-circle{ flex-basis:150px !important; max-width:150px; }
 }
