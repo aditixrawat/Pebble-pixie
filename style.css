@@ -161,7 +161,7 @@ h1,h2{ text-transform:uppercase; font-family:var(--font-display); font-weight:70
 .portal:hover{ box-shadow:var(--shadow-lg); }
 .portal:active{ transform:scale(.98); }
 .portal .pdot{ position:absolute; top:14px; left:14px; width:10px; height:10px; border-radius:50%; }
-.portal .pname{ font-family:var(--font-display); font-weight:700; font-size:17px; line-height:1.32; text-transform:uppercase; }
+.portal .pname{ width:100%; max-width:100%; overflow-wrap:break-word; word-break:break-word; font-family:var(--font-display); font-weight:700; font-size:17px; line-height:1.32; text-transform:uppercase; }
 .watch-q-row{ margin-top:26px; display:flex; flex-wrap:wrap; gap:clamp(20px,4cqw,40px); align-items:center; justify-content:center; }
 .watch-preview{ width:150px; filter:drop-shadow(0 14px 26px var(--shadow-color-3)); transition:transform 220ms var(--ease-spring); }
 .watch-opts{ display:flex; flex-wrap:wrap; gap:12px; }
@@ -273,4 +273,8 @@ footer img.banner{ width:100%; max-height:60vh; object-fit:cover; display:block;
   .club-row{ flex-direction:column; }
   .footer-links{ display:none; }
   .footer-links.open{ display:flex; }
+  .portal-row{ flex-direction:column; height:auto; }
+  .portal{ padding:16px 20px 16px 40px; min-height:64px; justify-content:flex-start; text-align:left; }
+  .portal .pdot{ top:50%; left:16px; transform:translateY(-50%); }
+  .portal .pname{ font-size:14px; line-height:1.32; }
 }
