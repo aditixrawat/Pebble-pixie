@@ -99,7 +99,6 @@
         <div class="reveal-kicker">
           <div class="reveal-kicker-label">Your pixie is ready.</div>
           <h2>now, meet your avatar.</h2>
-          <p>now find your people.</p>
         </div>
         <div class="reveal-row">
           <div class="card-frame" id="cardFrame">
@@ -133,7 +132,9 @@
               <button class="btn btn-secondary btn-lg" id="retakeBtn">Retake</button>
             </div>
             <div class="share-row">
-              <span>Share to</span><span class="share-pill">stories</span><span class="share-pill">copy link</span>
+              <span>Share to</span>
+              <button type="button" class="share-pill" id="shareStoriesBtn">stories</button>
+              <button type="button" class="share-pill" id="copyLinkBtn">copy link</button>
             </div>
           </div>
         </div>
@@ -152,7 +153,7 @@
     <div class="feature-reel-layout">
       <div class="feature-stage" aria-live="polite">
         <div class="feature-stage-layer display-layer active" data-layer="display">
-          <video id="domeVid" src="assets/domevid.mp4" poster="assets/dome-watch.jpg" muted playsinline loop preload="metadata" aria-label="Dome AMOLED display in motion"></video>
+          <video id="domeVid" data-dome-vid src="assets/domevid.mp4" poster="assets/dome-watch.jpg" muted playsinline loop preload="metadata" aria-label="Dome AMOLED display in motion"></video>
           <div class="feature-stage-stats">
             <span><strong>1.32"</strong>AMOLED</span>
             <span><strong>AOD</strong>Always on</span>
@@ -184,44 +185,92 @@
 
       <div class="feature-chapters">
         <article data-feature-chapter="display">
-          <span>01 / display</span>
-          <h3>Dome AMOLED</h3>
-          <p>Bright colour sits under a smooth 3D dome, with an always-on mode for quick glances.</p>
-          <ul>
-            <li>1.32-inch AMOLED</li>
-            <li>Always-on display</li>
-            <li>Curved glass profile</li>
-          </ul>
+          <div class="feature-chapter-visual">
+            <div class="feature-stage-layer display-layer active" data-layer="display">
+              <video data-dome-vid src="assets/domevid.mp4" poster="assets/dome-watch.jpg" muted playsinline loop preload="metadata" aria-hidden="true"></video>
+              <div class="feature-stage-stats">
+                <span><strong>1.32"</strong>AMOLED</span>
+                <span><strong>AOD</strong>Always on</span>
+              </div>
+            </div>
+            <div class="feature-stage-index"><span>01</span><i></i><span>04</span></div>
+          </div>
+          <div class="feature-chapter-copy">
+            <span>01 / display</span>
+            <h3>Dome AMOLED</h3>
+            <p>Bright colour sits under a smooth 3D dome, with an always-on mode for quick glances.</p>
+            <ul>
+              <li>1.32-inch AMOLED</li>
+              <li>Always-on display</li>
+              <li>Curved glass profile</li>
+            </ul>
+          </div>
         </article>
         <article data-feature-chapter="crown">
-          <span>02 / control</span>
-          <h3>Haptic crown</h3>
-          <p>Fine metal ridges and tactile feedback make lists, reminders and watch faces quick to move through.</p>
-          <ul>
-            <li>Physical scroll control</li>
-            <li>Haptic feedback</li>
-            <li>Fine metal ridges</li>
-          </ul>
+          <div class="feature-chapter-visual">
+            <div class="feature-stage-layer crown-layer active" data-layer="crown">
+              <img src="assets/crown-mint-quote.jpg" alt="" width="2048" height="2048" loading="lazy">
+              <span class="crown-ripple ripple-one" aria-hidden="true"></span>
+              <span class="crown-ripple ripple-two" aria-hidden="true"></span>
+              <div class="crown-ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="feature-stage-index"><span>02</span><i></i><span>04</span></div>
+          </div>
+          <div class="feature-chapter-copy">
+            <span>02 / control</span>
+            <h3>Haptic crown</h3>
+            <p>Fine metal ridges and tactile feedback make lists, reminders and watch faces quick to move through.</p>
+            <ul>
+              <li>Physical scroll control</li>
+              <li>Haptic feedback</li>
+              <li>Fine metal ridges</li>
+            </ul>
+          </div>
         </article>
         <article data-feature-chapter="health">
-          <span>03 / health</span>
-          <h3>Your daily readout</h3>
-          <p>Heart rate, SpO₂, sleep and steps stay together in one clear view.</p>
-          <ul>
-            <li>Heart rate</li>
-            <li>SpO₂ and sleep</li>
-            <li>Steps and sports modes</li>
-          </ul>
+          <div class="feature-chapter-visual">
+            <div class="feature-stage-layer health-layer active" data-layer="health">
+              <img src="assets/mint-health-render.jpg" alt="" width="2752" height="1536" loading="lazy">
+              <div class="health-hud">
+                <span class="health-ring"><i></i></span>
+                <strong>78</strong>
+                <small>BPM</small>
+                <em>10,245 steps</em>
+              </div>
+            </div>
+            <div class="feature-stage-index"><span>03</span><i></i><span>04</span></div>
+          </div>
+          <div class="feature-chapter-copy">
+            <span>03 / health</span>
+            <h3>Your daily readout</h3>
+            <p>Heart rate, SpO₂, sleep and steps stay together in one clear view.</p>
+            <ul>
+              <li>Heart rate</li>
+              <li>SpO₂ and sleep</li>
+              <li>Steps and sports modes</li>
+            </ul>
+          </div>
         </article>
         <article data-feature-chapter="smart">
-          <span>04 / smart</span>
-          <h3>The useful stuff, wrist-side</h3>
-          <p>Calls, texts, calendar updates and notifications arrive without pulling you out of the moment.</p>
-          <ul>
-            <li>Bluetooth calls</li>
-            <li>Texts and alerts</li>
-            <li>Calendar notifications</li>
-          </ul>
+          <div class="feature-chapter-visual">
+            <div class="feature-stage-layer smart-layer active" data-layer="smart">
+              <img src="assets/w-ui-message-c.png" alt="" width="420" height="420" loading="lazy">
+              <div class="smart-alert alert-one"><small>Group chat</small><strong>Plans moved to 8?</strong></div>
+              <div class="smart-alert alert-two"><small>Calendar</small><strong>Studio · 4:30 pm</strong></div>
+              <div class="smart-alert alert-three"><small>Call</small><strong>Riya calling</strong></div>
+            </div>
+            <div class="feature-stage-index"><span>04</span><i></i><span>04</span></div>
+          </div>
+          <div class="feature-chapter-copy">
+            <span>04 / smart</span>
+            <h3>The useful stuff, wrist-side</h3>
+            <p>Calls, texts, calendar updates and notifications arrive without pulling you out of the moment.</p>
+            <ul>
+              <li>Bluetooth calls</li>
+              <li>Texts and alerts</li>
+              <li>Calendar notifications</li>
+            </ul>
+          </div>
         </article>
       </div>
     </div>
@@ -243,7 +292,7 @@
       <div class="lifestyle-bento">
         <article class="life-tile life-quote">
           <div class="eyebrow">Lifestyle fit</div>
-          <h2 id="lifestyle-title">it's giving <span>main character</span> vibes.</h2>
+          <h2 id="lifestyle-title">It's giving <span>main character</span> vibes.</h2>
           <p>disrupt the status quo with a statement piece that reflects your inner pixie energy.</p>
         </article>
         <figure class="life-tile life-palm">
@@ -254,7 +303,7 @@
         </figure>
         <figure class="life-tile life-polaroid">
           <img src="assets/polaroid-phone.jpg" alt="Polaroid of someone scrolling with a Pixie on their wrist" width="900" height="1200" loading="lazy">
-          <figcaption>plot twist: it's a watch</figcaption>
+          <figcaption>plot twist: It's a watch</figcaption>
         </figure>
         <figure class="life-tile life-ads">
           <img src="assets/simple-ads-1787380604660-im0sn.webp" alt="Pixie in the wild, main-character lighting" width="1600" height="900" loading="lazy">
@@ -271,7 +320,7 @@
   </section>
 
   <section id="personas">
-    <h2>which pixie are you?</h2>
+    <h2>Which pixie are you?</h2>
     <p class="personas-sub">choose the perfect partner to your energy.</p>
     <div class="swatch-row" id="swatchRow"></div>
     <div class="swatch-name-wrap">
@@ -301,7 +350,7 @@
   <section id="club" style="background:var(--color-daydream-tint)">
     <div class="club-row">
       <div class="club-copy">
-        <h2>join the<br>anti boring club</h2>
+        <h2>Join the<br>anti boring club</h2>
         <p>a community of those who believe that life exists beyond gray squares and meeting schedules. the pixie lands 28 august.</p>
         <form class="club-form" action="#club" onsubmit="return false">
           <input class="club-email" type="email" autocomplete="email" placeholder="your email, no spam we promise">

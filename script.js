@@ -128,6 +128,8 @@ function bindQuiz(){
     showPanel('panelIntro');
   });
   on('downloadBtn', 'click', downloadCard);
+  on('shareStoriesBtn', 'click', downloadCard);
+  on('copyLinkBtn', 'click', copyPixieLink);
 }
 
 function renderTicks(){
@@ -347,6 +349,52 @@ async function downloadCard(){
   const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = 'pixie-' + p.key + '-story.png'; a.click();
 }
 
+function pixieShareUrl(){
+  const key = (state.persona && PERSONAS[state.persona]) ? state.persona : 'citrus';
+  const u = new URL(location.href);
+  u.searchParams.set('pixie', key);
+  u.hash = 'quiz';
+  return u.href;
+}
+
+async function copyPixieLink(){
+  const url = pixieShareUrl();
+  const btn = $('copyLinkBtn');
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(url);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    if (btn) {
+      const prev = btn.textContent;
+      btn.textContent = 'copied';
+      setTimeout(() => { btn.textContent = prev; }, 1600);
+    }
+  } catch (e) {
+    if (btn) btn.textContent = 'copy failed';
+  }
+}
+
+function openSharedPixie(){
+  const key = new URLSearchParams(location.search).get('pixie');
+  if (!key || !PERSONAS[key]) return;
+  state.persona = key;
+  state.colour = key;
+  state.stage = 'revealed';
+  showPanel('panelReveal');
+  renderReveal();
+  applyColourway(key);
+}
+
 /* ---- features in motion (sticky stage + scrolling chapters) ---- */
 const FEATURE_KEYS = ['display', 'crown', 'health', 'smart'];
 function setFeature(key){
@@ -365,14 +413,13 @@ function setFeature(key){
   syncDomeVid(key);
 }
 function syncDomeVid(beat){
-  const v = $('domeVid');
-  if (!v) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    v.pause();
-    return;
-  }
-  if (beat === 'display') v.play().catch(() => {});
-  else v.pause();
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-dome-vid]').forEach((v) => {
+    const host = v.closest('.feature-stage, .feature-chapter-visual');
+    const shown = host && host.offsetParent;
+    if (reduced || beat !== 'display' || !shown) v.pause();
+    else v.play().catch(() => {});
+  });
 }
 function initFeatureReel(){
   const reel = $('features');
@@ -568,6 +615,7 @@ function initHeroIntro(){
 try { initHeroIntro(); } catch (e) {}
 try { initFeatureReel(); } catch (e) {}
 try { applyColourway(state.colour); } catch (e) {}
+try { openSharedPixie(); } catch (e) {}
 try { renderFooter(); } catch (e) {}
 try { initFacesShowcase(); } catch (e) {}
 bindQuiz();
