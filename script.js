@@ -457,6 +457,9 @@ function applyColourway(key){
   state.colour = key;
   const footer = $('siteFooter');
   if (footer) footer.dataset.pixie = key;
+  const club = $('club');
+  if (club) club.dataset.pixie = key;
+  setText('clubChip', PERSONAS[key].name);
   renderSwatches();
   renderSwatchDisplay();
 }
