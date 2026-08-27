@@ -419,16 +419,19 @@ function setFeature(key, withNotes){
     const idx = $('featureIdx');
     if (idx) idx.textContent = String(FEATURE_KEYS.indexOf(key) + 1).padStart(2, '0');
   }
-  syncDomeVid(key);
+  syncFeatureVids(key);
   if (withNotes !== false) unlockFeatureNotes(key);
 }
-function syncDomeVid(beat){
+function syncFeatureVids(beat){
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-dome-vid]').forEach((v) => {
+  const map = { display: '[data-dome-vid]', crown: '[data-haptic-vid]' };
+  document.querySelectorAll('[data-dome-vid], [data-haptic-vid]').forEach((v) => {
     const host = v.closest('.feature-stage, .feature-chapter-visual');
     const shown = host && host.offsetParent;
-    if (reduced || beat !== 'display' || !shown) v.pause();
-    else v.play().catch(() => {});
+    const sel = map[beat];
+    const should = !reduced && shown && sel && v.matches(sel);
+    if (should) v.play().catch(() => {});
+    else v.pause();
   });
 }
 function initFeatureReel(){

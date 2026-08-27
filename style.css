@@ -542,6 +542,9 @@ h1,h2{ font-family:var(--font-display); font-weight:600; margin:0; }
   font-size: 18px;
   letter-spacing: -.04em;
 }
+.crown-layer > video{
+  object-fit: cover;
+}
 .crown-layer{
   background:
     radial-gradient(circle at 60% 42%, rgba(255,255,255,.12), transparent 34%),
