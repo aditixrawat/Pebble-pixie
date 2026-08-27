@@ -470,6 +470,11 @@ function renderSwatchDisplay(){
   const mark = $('swatchMark'); if (mark) mark.style.color = p.color;
   setText('swatchName', p.name);
   const img = $('swatchImg'); if (img) img.src = p.img;
+  const atc = $('personasAtc');
+  if (atc){
+    delete atc.dataset.added;
+    setText('personasAtcLabel', 'Add to cart');
+  }
 }
 
 /* ---- footer accordion (mobile) ---- */
@@ -623,6 +628,18 @@ try { openSharedPixie(); } catch (e) {}
 try { renderFooter(); } catch (e) {}
 try { initFacesShowcase(); } catch (e) {}
 bindQuiz();
+on('personasAtc', 'click', () => {
+  const btn = $('personasAtc');
+  if (!btn || btn.dataset.added) return;
+  const p = PERSONAS[state.colour] || PERSONAS.citrus;
+  btn.dataset.added = '1';
+  setText('personasAtcLabel', p.name + ' added');
+  window.setTimeout(() => {
+    if (btn.dataset.added !== '1') return;
+    delete btn.dataset.added;
+    setText('personasAtcLabel', 'Add to cart');
+  }, 1800);
+});
 on('logoBtn', 'click', () => {
   const url = location.pathname + location.search;
   if (location.hash) history.replaceState(null, '', url);
