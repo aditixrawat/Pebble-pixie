@@ -539,7 +539,11 @@ function initFacesShowcase(){
   const speed = stripWidth / 11.6;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fit = () => {
-    const s = Math.max(media.clientWidth / 1920, media.clientHeight / 1080);
+    const w = media.clientWidth;
+    const h = media.clientHeight;
+    const s = w < 721
+      ? (w * 0.7) / 690
+      : Math.max(w / 1920, h / 1080);
     media.style.setProperty('--faces-scale', String(s));
   };
   fit();
