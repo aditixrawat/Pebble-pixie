@@ -49,7 +49,10 @@
     </div>
     <div class="hero-copy">
       <h1>Welcome to the anti-boring club</h1>
-      <a href="#quiz" class="btn btn-primary btn-lg hero-cta">Take the vibe check →</a>
+      <div class="hero-cta-group">
+        <a href="#quiz" class="btn btn-primary btn-lg hero-cta">Take the vibe check →</a>
+        <a href="#atc" class="btn btn-secondary btn-lg hero-cta">Adopt a Pixie →</a>
+      </div>
     </div>
   </section>
 
@@ -145,7 +148,6 @@
 
   <section id="features" class="feature-reel feature-display" data-feature="display" aria-labelledby="feature-reel-title">
     <div class="feature-reel-heading">
-      <p class="eyebrow">On the wrist</p>
       <h2 id="feature-reel-title">Features,<br>in motion.</h2>
       <p class="feature-reel-sub">Dome, crown, body, chat. Scroll and the hardware keeps up.</p>
     </div>
@@ -179,8 +181,6 @@
         </div>
         <div class="feature-stage-layer crown-layer" data-layer="crown">
           <video data-haptic-vid src="assets/hapticvideo.mp4" poster="assets/crown-mint-quote.jpg" muted playsinline loop preload="metadata" aria-label="Pixie haptic crown in motion"></video>
-          <span class="crown-ripple ripple-one" aria-hidden="true"></span>
-          <span class="crown-ripple ripple-two" aria-hidden="true"></span>
           <div class="crown-ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
         <div class="feature-stage-layer health-layer" data-layer="health">
@@ -228,8 +228,6 @@
           <div class="feature-chapter-visual">
             <div class="feature-stage-layer crown-layer active" data-layer="crown">
               <video data-haptic-vid src="assets/hapticvideo.mp4" poster="assets/crown-mint-quote.jpg" muted playsinline loop preload="metadata" aria-hidden="true"></video>
-              <span class="crown-ripple ripple-one" aria-hidden="true"></span>
-              <span class="crown-ripple ripple-two" aria-hidden="true"></span>
               <div class="crown-ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
             </div>
             <div class="feature-stage-index"><span>02</span><i></i><span>04</span></div>
@@ -305,20 +303,26 @@
     </div>
   </section>
 
-  <section id="personas">
-    <h2>Which pixie are you?</h2>
-    <p class="personas-sub">choose the perfect partner to your energy.</p>
-    <div class="swatch-row" id="swatchRow"></div>
-    <div class="swatch-name-wrap">
-      <div class="swatch-name-row" id="swatchNameRow">
-        <span class="persona-mark" id="swatchMark"></span><span id="swatchName"></span>
+  <section id="personas" data-pixie="citrus">
+    <div class="personas-copy">
+      <h2>Which pixie are you?</h2>
+      <p class="personas-sub">choose the perfect partner to your energy.</p>
+      <div class="swatch-row" id="swatchRow"></div>
+      <div class="swatch-name-wrap" hidden>
+        <div class="swatch-name-row" id="swatchNameRow">
+          <span class="persona-mark" id="swatchMark"></span><span id="swatchName"></span>
+        </div>
+      </div>
+      <div class="personas-atc-wrap" id="atc">
+        <button type="button" class="personas-atc" id="personasAtc">
+          <span id="personasAtcLabel">Add to cart</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </button>
       </div>
     </div>
-    <img id="swatchImg" alt="Selected Pixie colourway">
-    <button type="button" class="personas-atc" id="personasAtc">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>
-      <span id="personasAtcLabel">Add to cart</span>
-    </button>
+    <div class="personas-product">
+      <img id="swatchImg" alt="Selected Pixie colourway">
+    </div>
   </section>
 
   <section id="lifestyle" class="lifestyle" aria-labelledby="lifestyle-title">

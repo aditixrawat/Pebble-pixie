@@ -452,15 +452,24 @@ function initFeatureReel(){
 /* ---- swatch selector ---- */
 function paintSwatchRow(row, size, selectedBorder){
   if (!row) return;
+  const isPersonas = row.id === 'swatchRow';
   row.innerHTML = '';
   ['citrus','mint','daydream'].forEach(key => {
     const p = PERSONAS[key];
+    const selected = state.colour === key;
     const b = document.createElement('button');
     b.type = 'button';
+    b.className = 'swatch-dot' + (selected ? ' is-selected' : '');
     b.setAttribute('aria-label', p.name);
-    b.style.width = size; b.style.height = size; b.style.borderRadius = '50%'; b.style.cursor = 'pointer';
+    b.setAttribute('aria-pressed', selected ? 'true' : 'false');
     b.style.background = p.color;
-    b.style.border = state.colour === key ? selectedBorder : '3px solid transparent';
+    if (!isPersonas) {
+      b.style.width = size;
+      b.style.height = size;
+      b.style.borderRadius = '50%';
+      b.style.cursor = 'pointer';
+      b.style.border = selected ? selectedBorder : '3px solid transparent';
+    }
     b.onclick = () => applyColourway(key);
     row.appendChild(b);
   });
@@ -472,6 +481,8 @@ function applyColourway(key){
   if (footer) footer.dataset.pixie = key;
   const club = $('club');
   if (club) club.dataset.pixie = key;
+  const personas = $('personas');
+  if (personas) personas.dataset.pixie = key;
   setText('clubChip', PERSONAS[key].name);
   renderSwatches();
   renderSwatchDisplay();
