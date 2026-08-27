@@ -397,7 +397,16 @@ function openSharedPixie(){
 
 /* ---- features in motion (sticky stage + scrolling chapters) ---- */
 const FEATURE_KEYS = ['display', 'crown', 'health', 'smart'];
-function setFeature(key){
+let notesUnlocked = 0;
+function unlockFeatureNotes(key){
+  const rank = { display: 1, crown: 2, health: 3, smart: 3 };
+  notesUnlocked = Math.max(notesUnlocked, rank[key] || 0);
+  document.querySelectorAll('.sticky-note').forEach((el) => {
+    const at = Number(el.dataset.noteAt || 99);
+    el.classList.toggle('is-in', at <= notesUnlocked);
+  });
+}
+function setFeature(key, withNotes){
   const reel = $('features');
   if (!reel || !FEATURE_KEYS.includes(key)) return;
   if (reel.dataset.feature !== key){
@@ -411,6 +420,7 @@ function setFeature(key){
     if (idx) idx.textContent = String(FEATURE_KEYS.indexOf(key) + 1).padStart(2, '0');
   }
   syncDomeVid(key);
+  if (withNotes !== false) unlockFeatureNotes(key);
 }
 function syncDomeVid(beat){
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -425,7 +435,7 @@ function initFeatureReel(){
   const reel = $('features');
   const chapters = document.querySelectorAll('[data-feature-chapter]');
   if (!reel || !chapters.length) return;
-  setFeature('display');
+  setFeature('display', false);
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver((entries) => {
     const hit = entries
