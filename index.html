@@ -97,19 +97,19 @@
 
     <div class="quiz-panel" id="panelReveal">
       <div class="reveal-stage" id="revealStage" data-pixie="citrus">
-        <img class="reveal-life" id="revealLife" alt="">
         <div class="reveal">
         <div class="reveal-kicker">
           <div class="reveal-kicker-label">Your pixie is ready.</div>
           <h2>now, meet your avatar.</h2>
         </div>
         <div class="reveal-row">
-          <div class="card-frame" id="cardFrame">
-            <div class="card-inner" id="cardInner">
-              <img class="bg" id="cardBg" alt="">
-              <div class="grad"></div>
-              <div class="card-topband"><span class="card-clubtag">the anti boring club</span></div>
-              <div class="card-bottom">
+          <div class="reveal-print">
+            <article class="polaroid" id="cardFrame">
+              <div class="polaroid-well">
+                <img class="polaroid-photo" id="cardBg" alt="">
+                <span class="card-clubtag">the anti boring club</span>
+              </div>
+              <div class="polaroid-caption">
                 <div class="card-name-row" id="cardNameRow">
                   <span class="persona-mark" id="cardMark"></span>
                   <div class="card-name" id="cardName"></div>
@@ -117,17 +117,13 @@
                 <div class="card-subtitle" id="cardSubtitle"></div>
                 <div class="card-type-pill"><span class="swatch" id="cardSwatch"></span><span id="cardType"></span></div>
                 <div class="card-lines" id="cardLines"></div>
-                <div class="card-footer"><span class="word">pebble</span><span class="sub">Pixie smartwatch</span></div>
+                <div class="card-footer"></div>
               </div>
-            </div>
+            </article>
           </div>
+          <div class="reveal-analysis">
+          <h2 class="reveal-verdict-title" id="revealVerdict"></h2>
           <div class="reveal-side">
-            <div class="badge-box" id="badgeBox">
-              <div class="badge-top" id="badgeTop"><span class="persona-mark" id="badgeMark"></span><span id="badgeName"></span><span class="badge-type" id="badgeType"></span></div>
-              <div class="badge-sub" id="badgeSub"></div>
-            </div>
-            <p class="reveal-lines" id="revealLines"></p>
-            <div style="font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-muted);margin-top:6px" id="revealVibe"></div>
             <div class="stats-row" id="statsRow"></div>
             <p class="reveal-blurb" id="revealBlurb"></p>
             <div class="reveal-ctas">
@@ -139,6 +135,7 @@
               <button type="button" class="share-pill" id="shareStoriesBtn">stories</button>
               <button type="button" class="share-pill" id="copyLinkBtn">copy link</button>
             </div>
+          </div>
           </div>
         </div>
         </div>
@@ -153,6 +150,7 @@
     </div>
 
     <div class="feature-reel-layout">
+      <div class="feature-notes-bound" id="featureNotesBound">
       <div class="feature-notes-pin" aria-hidden="true">
         <div class="feature-notes">
           <aside class="sticky-note note-citrus" data-note-at="1">
@@ -170,6 +168,7 @@
             <strong>Always on</strong>
           </aside>
         </div>
+      </div>
       </div>
       <div class="feature-stage" aria-live="polite">
         <div class="feature-stage-layer display-layer active" data-layer="display">
@@ -195,8 +194,6 @@
         <div class="feature-stage-layer smart-layer" data-layer="smart">
           <img src="assets/w-ui-message-c.png" alt="Pixie message on the wrist" width="420" height="420" loading="lazy">
           <div class="smart-alert alert-one"><small>Group chat</small><strong>Plans moved to 8?</strong></div>
-          <div class="smart-alert alert-two"><small>Calendar</small><strong>Studio · 4:30 pm</strong></div>
-          <div class="smart-alert alert-three"><small>Call</small><strong>Riya calling</strong></div>
         </div>
         <div class="feature-stage-index"><span id="featureIdx">01</span><i></i><span>04</span></div>
       </div>
@@ -272,8 +269,6 @@
             <div class="feature-stage-layer smart-layer active" data-layer="smart">
               <img src="assets/w-ui-message-c.png" alt="" width="420" height="420" loading="lazy">
               <div class="smart-alert alert-one"><small>Group chat</small><strong>Plans moved to 8?</strong></div>
-              <div class="smart-alert alert-two"><small>Calendar</small><strong>Studio · 4:30 pm</strong></div>
-              <div class="smart-alert alert-three"><small>Call</small><strong>Riya calling</strong></div>
             </div>
             <div class="feature-stage-index"><span>04</span><i></i><span>04</span></div>
           </div>
@@ -292,16 +287,49 @@
     </div>
   </section>
 
-  <section id="straps" style="background:var(--color-citrus); color:var(--color-ink)">
-    <div class="content" style="display:flex;flex-wrap:wrap;gap:clamp(24px,5cqw,64px);align-items:center;justify-content:center">
-      <div style="flex:1 1 420px">
+  <section id="straps">
+    <div class="straps-copy">
+      <div class="straps-copy-inner">
         <div class="eyebrow">Soft touch straps</div>
-        <h2 style="font-size:clamp(34px,6.2cqw,90px);line-height:.98;letter-spacing:-.03em;margin:20px 0 0">gray is<br><span style="color:var(--color-white)">cancelled.</span></h2>
-        <p style="margin:18px 0 0;max-width:460px;font-size:clamp(15px,1.6cqw,18px);line-height:1.6;color:var(--color-ink);opacity:.72">swappable silicone straps that survive every side quest you ever take on.</p>
+        <h2>gray is<br><span>cancelled.</span></h2>
+        <p>swappable silicone straps that survive every side quest you ever take on.</p>
       </div>
-      <img src="assets/strap-citrus-quote.jpg" alt="Pixie Citrus Spark strap on the wrist" style="flex:1 1 420px;width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg)">
     </div>
+    <figure class="straps-visual">
+      <img src="assets/Basic.27.png" alt="Pixie on the wrist with a soft-touch strap" width="1600" height="1600">
+    </figure>
   </section>
+
+  <div class="quiz-film" aria-hidden="true">
+    <div class="quiz-film-tilt">
+      <div class="quiz-film-rail">
+        <div class="quiz-film-sprockets"></div>
+        <div class="quiz-film-viewport">
+          <div class="quiz-film-track">
+            <div class="quiz-film-run">
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/citrus.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-mint.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/blue.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-citrus.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/mint.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-blue.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/mint-health.jpg" alt="" width="400" height="400" loading="lazy"></figure>
+            </div>
+            <div class="quiz-film-run">
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/citrus.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-mint.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/blue.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-citrus.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/mint.webp" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/campaign-blue.png" alt="" width="400" height="400" loading="lazy"></figure>
+              <figure class="quiz-film-frame"><img src="assets/lifestyle/mint-health.jpg" alt="" width="400" height="400" loading="lazy"></figure>
+            </div>
+          </div>
+        </div>
+        <div class="quiz-film-sprockets"></div>
+      </div>
+    </div>
+  </div>
 
   <section id="lifestyle" class="lifestyle" aria-labelledby="lifestyle-title">
     <div class="content">
@@ -312,13 +340,13 @@
           <p>disrupt the status quo with a statement piece that reflects your inner pixie energy.</p>
         </article>
         <figure class="life-tile life-palm">
-          <img src="assets/lifestyle-palm.jpg" alt="Daydream Pixie on a wrist against palm trees and sky" width="1200" height="1600" loading="lazy">
+          <img src="assets/bento/mint-member-instant-table-4x5.webp" alt="Mint Pixie on a wrist at a sunlit table" width="1200" height="1500" loading="lazy">
         </figure>
         <figure class="life-tile life-ice">
-          <img src="assets/life-icecream.jpg" alt="Citrus Pixie on a wrist during an ice cream break" width="1200" height="1600" loading="lazy">
+          <img src="assets/bento/citrus-active-steps-4x3.webp" alt="Citrus Pixie on a wrist during an active day" width="1600" height="1200" loading="lazy">
         </figure>
         <figure class="life-tile life-polaroid">
-          <img src="assets/polaroid-phone.jpg" alt="Polaroid of someone scrolling with a Pixie on their wrist" width="900" height="1200" loading="lazy">
+          <img src="assets/bento/daydream-blue-record-sharing-candid-1x1.webp" alt="Daydream Pixie while sharing records" width="1200" height="1200" loading="lazy">
           <figcaption>plot twist: It's a watch</figcaption>
         </figure>
         <figure class="life-tile life-ads">

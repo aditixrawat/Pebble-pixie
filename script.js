@@ -1,15 +1,15 @@
 const PERSONAS = {
   citrus: { key:'citrus', mark:'citrus', name:'Citrus spark', type:'01', color:'#f0921f', tint:'#ffeeda',
     subtitle:'bold, spontaneous, always ready for the next adventure.', line1:"You don't wait for the fun.", line2:'You bring it.',
-    img:'assets/w-citrus-c.png', photo:'assets/orangecard.jfif', life:'assets/polaroid-citrus.jpg', vibe:'Bold · social · spontaneous',
+    img:'assets/w-citrus-c.png', photo:'assets/orangecard.jfif', life:'assets/orangecard.webp', vibe:'Bold · social · spontaneous',
     blurb:"sitting still? not really your thing. citrus spark is bold, social and always ready for the next adventure." },
   mint: { key:'mint', mark:'mint', name:'Mint mischief', type:'02', color:'#7dc496', tint:'#eaf7ee',
     subtitle:'sweet on the outside, slightly chaotic underneath.', line1:'You have a plan.', line2:'Whether anyone follows it is another story.',
-    img:'assets/w-mint-c.png', photo:'assets/mintcard.jfif', life:'assets/polaroid-mint.jpg', vibe:'Playful · clever · chaotic',
+    img:'assets/w-mint-c.png', photo:'assets/mintcard.jfif', life:'assets/mintcard.webp', vibe:'Playful · clever · chaotic',
     blurb:'probably the unofficial planner, problem-solver and chaos manager of your friend group. mint mischief keeps the group chat unwell in the best possible way.' },
   daydream: { key:'daydream', mark:'daydream', name:'Dreamy pixie', type:'03', color:'#93c4d6', tint:'#e8f4f8',
     subtitle:'soft, curious, and happily lost in your own little world.', line1:'Life is better when you slow down.', line2:'And notice the little things.',
-    img:'assets/w-blue-c.png', photo:'assets/bluecard.jfif', life:'assets/polaroid-blue.jpg', vibe:'Dreamy · calm · curious',
+    img:'assets/w-blue-c.png', photo:'assets/bluecard.jfif', life:'assets/bluecard.webp', vibe:'Dreamy · calm · curious',
     blurb:'you romanticize ordinary moments and somehow make doing nothing feel like a whole vibe. dreamy pixie is soft, calm and quietly curious.' }
 };
 
@@ -240,6 +240,8 @@ function runCalculating(){
     showPanel('panelReveal');
     renderReveal();
     applyColourway(win);
+    const quiz = document.getElementById('quiz');
+    if (quiz) quiz.scrollIntoView({ behavior: 'auto', block: 'start' });
   }, 500 + seq.length * 550 + 600);
 }
 
@@ -248,27 +250,18 @@ function renderReveal(){
   const p = PERSONAS[state.persona] || PERSONAS.citrus;
   const stage = $('revealStage');
   if (stage) stage.dataset.pixie = p.key;
-  const life = $('revealLife');
-  if (life) { life.src = p.life; life.alt = p.name + ' lifestyle'; }
   const cardBg = $('cardBg');
-  if (cardBg) cardBg.src = p.photo;
-  setHtml('cardMark', MARK_SVG[p.mark](84));
+  if (cardBg) { cardBg.src = p.life; cardBg.alt = p.name + ' polaroid'; }
+  setHtml('cardMark', MARK_SVG[p.mark](28));
   const cardMark = $('cardMark'); if (cardMark) cardMark.style.color = p.color;
   setText('cardName', p.name);
+  setText('revealVerdict', 'You are ' + p.name + '.');
   setText('cardSubtitle', p.subtitle);
   const sw = $('cardSwatch'); if (sw) sw.style.background = p.color;
   setText('cardType', 'Pixie type ' + p.type);
-  setHtml('cardLines', p.line1 + '<br>' + p.line2);
+  const linesEl = $('cardLines');
+  if (linesEl) linesEl.replaceChildren();
 
-  const badgeBox = $('badgeBox'); if (badgeBox) badgeBox.style.background = p.tint;
-  setHtml('badgeMark', MARK_SVG[p.mark](24));
-  const badgeTop = $('badgeTop'); if (badgeTop) badgeTop.style.color = p.color;
-  setText('badgeName', p.name);
-  const badgeName = $('badgeName'); if (badgeName) badgeName.style.color = 'var(--color-ink)';
-  setText('badgeType', 'type ' + p.type);
-  setText('badgeSub', p.subtitle);
-  setHtml('revealLines', p.line1 + '<br>' + p.line2);
-  setText('revealVibe', p.vibe);
   setText('revealBlurb', p.blurb);
 
   const chaos = Math.min(96, state.scores.mint * 20 + 12);
@@ -282,11 +275,7 @@ function renderReveal(){
   updateCardScale();
 }
 
-function updateCardScale(){
-  const frameEl = $('cardFrame');
-  if (!frameEl || !frameEl.offsetWidth) return;
-  frameEl.style.setProperty('--card-scale', frameEl.offsetWidth / 1080);
-}
+function updateCardScale(){}
 
 function drawMark(x, key, cx, cy, r){
   x.beginPath();
@@ -313,39 +302,43 @@ async function downloadCard(){
   const p = PERSONAS[state.persona] || PERSONAS.citrus;
   const c = document.createElement('canvas'); c.width = 1080; c.height = 1920;
   const x = c.getContext('2d');
-  x.fillStyle = p.tint; x.fillRect(0,0,1080,1920);
+  const pad = 52;
+  const photoBottom = 1288;
   try { await document.fonts.load('600 150px Quicksand'); await document.fonts.load('600 56px Inter'); } catch(e){}
-  x.fillStyle = 'rgba(0,45,70,.55)'; x.font = '600 34px Inter, sans-serif';
-  x.fillText('the anti boring club', 90, 150);
+  x.fillStyle = '#fafafa'; x.fillRect(0,0,1080,1920);
+  x.fillStyle = '#002d46'; x.fillRect(pad, pad, 1080 - pad * 2, photoBottom - pad);
   try {
-    const bg = await new Promise((res, rej) => { const i = new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=p.photo; });
-    const s = Math.max(1080/bg.width, 1920/bg.height);
-    x.drawImage(bg, (1080-bg.width*s)/2, (1920-bg.height*s)/2, bg.width*s, bg.height*s);
+    const bg = await new Promise((res, rej) => { const i = new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=p.life; });
+    const pw = 1080 - pad * 2, ph = photoBottom - pad;
+    const s = Math.max(pw / bg.width, ph / bg.height);
+    x.save();
+    x.beginPath(); x.rect(pad, pad, pw, ph); x.clip();
+    x.drawImage(bg, pad + (pw - bg.width * s) / 2, pad + (ph - bg.height * s) / 2, bg.width * s, bg.height * s);
+    x.restore();
   } catch(e){}
-  const grad = x.createLinearGradient(0,0,0,1920);
-  grad.addColorStop(0,'rgba(0,20,32,.15)'); grad.addColorStop(0.3,'rgba(0,20,32,.05)');
-  grad.addColorStop(0.68,'rgba(0,20,32,.55)'); grad.addColorStop(1,'rgba(0,20,32,.92)');
-  x.fillStyle = grad; x.fillRect(0,0,1080,1920);
-  x.fillStyle = 'rgba(255,255,255,.9)'; x.font = '600 34px Inter, sans-serif';
-  x.fillText('the anti boring club', 90, 150);
+  x.fillStyle = 'rgba(255,255,255,.88)';
+  x.beginPath(); x.roundRect(88, 88, 420, 56, 28); x.fill();
+  x.fillStyle = '#002d46'; x.font = '600 26px Inter, sans-serif';
+  x.fillText('the anti boring club', 112, 125);
   x.strokeStyle = p.color; x.lineWidth = 6; x.lineCap = 'round';
-  drawMark(x, p.mark, 1180, 1445, 34);
-  x.fillStyle = '#fff'; x.font = '600 90px Quicksand, sans-serif';
-  x.fillText(p.name, 90, 1480);
-  x.font = '600 30px Inter, sans-serif'; x.globalAlpha = 0.85;
-  x.fillText(p.subtitle, 90, 1525); x.globalAlpha = 1;
-  x.fillStyle = 'rgba(255,255,255,.14)'; x.beginPath(); x.roundRect(90,1565,320,62,31); x.fill();
-  x.fillStyle = p.color; x.beginPath(); x.arc(120,1596,9,0,Math.PI*2); x.fill();
-  x.fillStyle = '#fff'; x.font = '600 22px Inter, sans-serif';
-  x.fillText('Pixie type ' + p.type, 145, 1604);
-  x.font = '600 32px Inter, sans-serif';
-  x.fillText(p.line1, 90, 1690); x.fillText(p.line2, 90, 1732);
-  x.strokeStyle = 'rgba(255,255,255,.28)'; x.lineWidth = 2;
-  x.beginPath(); x.moveTo(90,1770); x.lineTo(990,1770); x.stroke();
-  x.fillStyle = '#fff'; x.font = '600 42px Quicksand, sans-serif';
-  x.fillText('pebble', 90, 1840);
-  x.font = '600 20px Inter, sans-serif'; x.fillStyle = 'rgba(255,255,255,.75)';
-  x.fillText('Pixie smartwatch', 220, 1840);
+  drawMark(x, p.mark, 118, 1388, 28);
+  x.fillStyle = '#002d46'; x.font = '600 72px Quicksand, sans-serif';
+  x.fillText(p.name, 168, 1410);
+  x.font = '600 28px Inter, sans-serif'; x.globalAlpha = 0.78;
+  x.fillText(p.subtitle, 72, 1462); x.globalAlpha = 1;
+  x.strokeStyle = '#002d46'; x.lineWidth = 2;
+  x.beginPath(); x.roundRect(72, 1490, 300, 52, 26); x.stroke();
+  x.fillStyle = p.color; x.beginPath(); x.arc(100, 1516, 9, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#002d46'; x.font = '600 22px Inter, sans-serif';
+  x.fillText('Pixie type ' + p.type, 122, 1524);
+  x.font = '600 30px Inter, sans-serif';
+  x.fillText(p.line1, 72, 1608); x.fillText(p.line2, 72, 1650);
+  x.strokeStyle = 'rgba(0,45,70,.16)'; x.lineWidth = 2;
+  x.beginPath(); x.moveTo(72, 1700); x.lineTo(1008, 1700); x.stroke();
+  x.fillStyle = '#002d46'; x.font = '600 40px Quicksand, sans-serif';
+  x.fillText('pebble', 72, 1768);
+  x.font = '600 20px Inter, sans-serif'; x.fillStyle = 'rgba(0,45,70,.6)';
+  x.fillText('Pixie smartwatch', 210, 1768);
   const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = 'pixie-' + p.key + '-story.png'; a.click();
 }
 
@@ -413,7 +406,7 @@ function setFeature(key, withNotes){
     reel.dataset.feature = key;
     reel.classList.remove('feature-display', 'feature-crown', 'feature-health', 'feature-smart');
     reel.classList.add('feature-' + key);
-    reel.querySelectorAll('.feature-stage-layer').forEach((el) => {
+    reel.querySelectorAll('.feature-stage > .feature-stage-layer').forEach((el) => {
       el.classList.toggle('active', el.dataset.layer === key);
     });
     const idx = $('featureIdx');
@@ -434,19 +427,70 @@ function syncFeatureVids(beat){
     else v.pause();
   });
 }
+function sizeFeatureNotesBound(){
+  const bound = $('featureNotesBound');
+  if (!bound) return;
+  if (getComputedStyle(bound).display === 'none'){
+    bound.style.height = '';
+    return;
+  }
+  const layout = document.querySelector('.feature-reel-layout');
+  const health = document.querySelector('[data-feature-chapter="health"]');
+  if (!layout || !health) return;
+  const top = layout.getBoundingClientRect().top;
+  const end = health.getBoundingClientRect().bottom;
+  bound.style.height = Math.max(0, Math.round(end - top)) + 'px';
+}
+function featurePinLine(){
+  const stage = document.querySelector('#features .feature-stage');
+  if (stage && getComputedStyle(stage).display !== 'none'){
+    const r = stage.getBoundingClientRect();
+    if (r.height > 40) return r.top + r.height * 0.38;
+  }
+  return (window.innerHeight || 800) * 0.38;
+}
+function activeFeatureFromScroll(chapterEls){
+  const line = featurePinLine();
+  let key = null;
+  for (let i = 0; i < chapterEls.length; i++){
+    const ch = chapterEls[i];
+    if (ch.getBoundingClientRect().top <= line) key = ch.dataset.featureChapter || key;
+  }
+  return key;
+}
+function syncFeatureFromScroll(chapterEls){
+  const key = activeFeatureFromScroll(chapterEls);
+  if (!key){
+    setFeature('display', false);
+    return;
+  }
+  setFeature(key);
+}
 function initFeatureReel(){
   const reel = $('features');
-  const chapters = document.querySelectorAll('[data-feature-chapter]');
+  const chapters = Array.from(document.querySelectorAll('[data-feature-chapter]'));
   if (!reel || !chapters.length) return;
   setFeature('display', false);
-  if (!('IntersectionObserver' in window)) return;
-  const obs = new IntersectionObserver((entries) => {
-    const hit = entries
-      .filter((e) => e.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (hit) setFeature(hit.target.dataset.featureChapter || 'display');
-  }, { rootMargin: '-20% 0px -35% 0px', threshold: [0.15, 0.35, 0.55, 0.75] });
+  sizeFeatureNotesBound();
+  window.addEventListener('resize', sizeFeatureNotesBound);
+  if ('ResizeObserver' in window){
+    const ro = new ResizeObserver(sizeFeatureNotesBound);
+    ro.observe(reel);
+    const health = document.querySelector('[data-feature-chapter="health"]');
+    if (health) ro.observe(health);
+  }
+  const onPin = () => syncFeatureFromScroll(chapters);
+  if (!('IntersectionObserver' in window)){
+    onPin();
+    return;
+  }
+  const obs = new IntersectionObserver(onPin, {
+    rootMargin: '-36% 0px -48% 0px',
+    threshold: [0, 0.08, 0.2, 0.4, 0.6, 0.8, 1]
+  });
   chapters.forEach((ch) => obs.observe(ch));
+  obs.observe(reel);
+  onPin();
 }
 
 /* ---- swatch selector ---- */
